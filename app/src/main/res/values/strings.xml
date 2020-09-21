@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LuasTestApp</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="toolbar_title">%1$s - %2$s</string>
+    <string name="no_trams_available">There are no trams available! Try again later.</string>
+    <string name="due_in">Due In:</string>
+    <string name="minute">%1$s Minute</string>
+    <string name="minutes">%1$s Minutes</string>
+
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="cardView_margin">10dp</dimen>
+    <dimen name="tiny_padding">4dp</dimen>
+</resources>
