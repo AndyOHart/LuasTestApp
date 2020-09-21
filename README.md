@@ -17,7 +17,7 @@ It includes quite a modern architecture and uses new libraries where possible
 
 ## Choices
 I chose to use RxMVP as I worked with it a lot in my previous job and found it very easy to understand
-Hilt was used as I am currently trying to learn a bit more about it
+Hilt was used as I am currently trying to learn a bit more about it.
 TikXML was a library I found to allow easy parsing of XML data and add a converter to Retrofit
-JodaTime made the time handling aspect quite easy
+JodaTime made the time handling aspect quite easy.
 RxJava is used for observing on view interactions, these callbacks are then handled in the Presenter class.
