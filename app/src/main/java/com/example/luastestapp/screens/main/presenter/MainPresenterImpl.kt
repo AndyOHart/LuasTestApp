@@ -2,6 +2,7 @@ package com.example.luastestapp.screens.main.presenter
 
 import com.example.luastestapp.model.Direction
 import com.example.luastestapp.model.StopInfo
+import com.example.luastestapp.model.StopNames
 import com.example.luastestapp.screens.main.model.MainModel
 import com.example.luastestapp.screens.main.view.MainView
 import com.example.luastestapp.utils.DateUtils
@@ -9,16 +10,17 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-
 import javax.inject.Inject
+
 
 class MainPresenterImpl @Inject constructor(
     private val view: MainView,
     private val interactor: MainModel
 ) : MainPresenter {
 
+
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val defaultStop = if (DateUtils.currentlyBetweenMiddayAndMidnight()) "sti" else "mar"
+    private val defaultStop = if (DateUtils.isAM()) StopNames.marlborough else StopNames.stillorgan
 
     override fun onCreate() {
         compositeDisposable.add(handleRefreshButton())
@@ -37,14 +39,15 @@ class MainPresenterImpl @Inject constructor(
             .doOnTerminate { view.hideLoading() }
             .subscribe(
                 { luasStop -> handleLuasStopResponse(luasStop) },
-                { view.showSnackBar("Network Error") })
+                {
+                    view.showSnackBar("Network Error")
+                    view.showNoTramsAvailable(false)
+                })
     }
 
-
     private fun handleLuasStopResponse(luasStop: StopInfo) {
-        val currentlyBetweenMiddayAndMidnight = DateUtils.currentlyBetweenMiddayAndMidnight()
-        val currentDirection =
-            if (currentlyBetweenMiddayAndMidnight) luasStop.directions[0] else luasStop.directions[1]
+        val isAM = DateUtils.isAM()
+        val currentDirection = if (isAM) luasStop.directions[1] else luasStop.directions[0]
         val tramsAvailable = areTramsAvailable(currentDirection)
 
         view.setTitle(luasStop.stop, currentDirection.name, luasStop.message)

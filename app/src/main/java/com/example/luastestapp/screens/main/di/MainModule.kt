@@ -11,7 +11,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.scopes.ActivityScoped
-import retrofit2.Retrofit
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -22,7 +21,8 @@ object MainModule {
         MainPresenterImpl(view, interactor)
 
     @Provides
-    fun provideInteractor(apiService: LuasApiService) = MainModelImpl(apiService)
+    fun provideInteractor(@ActivityContext context: Context, apiService: LuasApiService) =
+        MainModelImpl(context, apiService)
 
     @Provides
     @ActivityScoped

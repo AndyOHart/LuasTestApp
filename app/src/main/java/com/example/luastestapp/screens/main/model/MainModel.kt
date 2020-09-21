@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Observable
 
 interface MainModel {
     fun getLuasStops(stopName: String): Observable<StopInfo>
-    fun getMockLuasStop(): StopInfo
+    fun getDueMinsString(dueMins: String): String
 }

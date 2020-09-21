@@ -23,14 +23,14 @@ class MainViewImpl @Inject constructor(context: Context) : FrameLayout(context),
     }
 
     override fun showLoading() {
-        progressBar.visibility = View.VISIBLE
+        progressBar.visibility = VISIBLE
         tramsRecyclerView.visibility = GONE
         noTramsAvailableImageView.visibility = GONE
         noTramsAvailableTextView.visibility = GONE
     }
 
     override fun hideLoading() {
-        progressBar.visibility = View.GONE
+        progressBar.visibility = GONE
     }
 
     override fun observeRefreshButtonClick(): Observable<Unit> {

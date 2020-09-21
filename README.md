@@ -20,4 +20,12 @@ I chose to use RxMVP as I worked with it a lot in my previous job and found it v
 Hilt was used as I am currently trying to learn a bit more about it.
 TikXML was a library I found to allow easy parsing of XML data and add a converter to Retrofit
 JodaTime made the time handling aspect quite easy.
+
 RxJava is used for observing on view interactions, these callbacks are then handled in the Presenter class.
+You can see from commits that I had a getMockLuasStops method which returned a mock object, this was done as
+during the night no Luas stops were available, so it was to test when I worked on it at night time.
+Originally I had tried doing this with an okHttp interceptor, however it didn't seem to work.
+
+If I was to work further on the app, I would have a separate file containing all the Luas stop names which
+will populate a dropdown to allow you to select the stop you want for Inbound and Outbound during the time
+periods. I would also make the stop retrieval automatically switch a setting that can be toggled on or off.

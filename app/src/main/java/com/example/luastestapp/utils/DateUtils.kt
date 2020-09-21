@@ -5,11 +5,13 @@ import org.joda.time.DateTime
 object DateUtils {
 
     @JvmStatic
-    fun currentlyBetweenMiddayAndMidnight(): Boolean {
+    fun isAM(): Boolean {
         val currentTime = DateTime.now()
-        val midday = DateTime().withHourOfDay(12).withMinuteOfHour(0)
-        val midnight = DateTime().withTimeAtStartOfDay().plusDays(1)
 
-        return currentTime.isAfter(midday) && currentTime.isBefore(midnight)
+        if (currentTime.hourOfDay == 12) {
+            return currentTime.minuteOfHour == 0
+        }
+
+        return currentTime.hourOfDay < 12
     }
 }

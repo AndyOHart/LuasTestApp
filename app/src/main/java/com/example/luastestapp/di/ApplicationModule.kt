@@ -17,16 +17,17 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object ApplicationModule {
 
+    private const val baseUrl = "https://luasforecasts.rpa.ie/xml/"
+
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl("https://luasforecasts.rpa.ie/xml/")
+        .baseUrl(baseUrl)
         .addConverterFactory(TikXmlConverterFactory.create())
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
 
-    //  https://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&stop=stir&encrypt=false
     @Singleton
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()

@@ -1,5 +1,6 @@
 package com.example.luastestapp.screens.main.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import com.example.luastestapp.R
 import com.example.luastestapp.model.Tram
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item.*
+import java.lang.Exception
 
 class TramListAdapter(private var tramList: List<Tram>) :
     RecyclerView.Adapter<TramListAdapter.ViewHolder>() {
@@ -37,10 +39,15 @@ class TramListAdapter(private var tramList: List<Tram>) :
         }
 
         private fun formatDueMins(dueMins: String): String {
-            return if (dueMins.toInt() == 1)
-                containerView.context.getString(
-                    R.string.minute, dueMins
-                ) else containerView.context.getString(R.string.minutes, dueMins)
+            return try {
+                if (dueMins.toInt() == 1)
+                    containerView.context.getString(
+                        R.string.minute, dueMins
+                    ) else containerView.context.getString(R.string.minutes, dueMins)
+            } catch (exception: Exception) {
+                Log.d("TramListAdapter", "Error parsing dueMins, actual value is: $dueMins")
+                dueMins
+            }
         }
     }
 
