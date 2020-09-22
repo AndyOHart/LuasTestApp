@@ -8,7 +8,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import javax.inject.Singleton
@@ -21,8 +20,7 @@ object ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .client(okHttpClient)
+    fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(TikXmlConverterFactory.create())
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -31,11 +29,6 @@ object ApplicationModule {
     @Singleton
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
-
-    @Singleton
-    @Provides
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient()
-
 
     @Singleton
     @Provides

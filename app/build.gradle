@@ -36,6 +36,9 @@ android {
     androidExtensions {
         experimental = true
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -48,8 +51,6 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
 
     //Hilt
     implementation "com.google.dagger:hilt-android:2.28.1-alpha"
@@ -61,13 +62,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
-
-    //OkHttp
-    implementation("com.squareup.okhttp3:okhttp:4.9.0")
 
     //TikXML
     implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
     implementation 'com.tickaroo.tikxml:core:0.8.13'
     kapt 'com.tickaroo.tikxml:processor:0.8.13'
 
@@ -80,9 +78,13 @@ dependencies {
     implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
 
     //Test
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'androidx.test:core:1.3.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    testImplementation "org.mockito:mockito-core:3.5.11"
-    androidTestImplementation "org.mockito:mockito-android:3.5.11"
+    testImplementation('org.mockito:mockito-inline:3.4.0')
+    testImplementation 'org.mockito:mockito-core:3.5.11'
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+    testImplementation "org.powermock:powermock-module-junit4:2.0.0"
+    testImplementation "org.powermock:powermock-module-junit4-rule:2.0.0"
 }

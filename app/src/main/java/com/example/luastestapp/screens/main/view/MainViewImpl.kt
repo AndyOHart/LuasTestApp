@@ -3,6 +3,7 @@ package com.example.luastestapp.screens.main.view
 import android.content.Context
 import android.view.View
 import android.widget.FrameLayout
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luastestapp.R
 import com.example.luastestapp.model.Tram
@@ -37,8 +38,8 @@ class MainViewImpl @Inject constructor(context: Context) : FrameLayout(context),
         return refreshFab.clicks()
     }
 
-    override fun showSnackBar(snackBarText: String) {
-        Snackbar.make(this, snackBarText, Snackbar.LENGTH_SHORT).show()
+    override fun showSnackBar(@StringRes textRes: Int) {
+        Snackbar.make(this, context.getString(textRes), Snackbar.LENGTH_SHORT).show()
     }
 
     override fun showNoTramsAvailable(areTramsAvailable: Boolean) {

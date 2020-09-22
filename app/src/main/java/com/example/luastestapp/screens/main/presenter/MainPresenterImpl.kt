@@ -1,5 +1,6 @@
 package com.example.luastestapp.screens.main.presenter
 
+import com.example.luastestapp.R
 import com.example.luastestapp.model.Direction
 import com.example.luastestapp.model.StopInfo
 import com.example.luastestapp.model.StopNames
@@ -12,12 +13,10 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-
 class MainPresenterImpl @Inject constructor(
     private val view: MainView,
-    private val interactor: MainModel
+    private val model: MainModel
 ) : MainPresenter {
-
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val defaultStop = if (DateUtils.isAM()) StopNames.marlborough else StopNames.stillorgan
@@ -32,7 +31,7 @@ class MainPresenterImpl @Inject constructor(
     }
 
     private fun getLuasStops(): Disposable {
-        return interactor.getLuasStops(defaultStop)
+        return model.getLuasStops(defaultStop)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showLoading() }
@@ -40,7 +39,7 @@ class MainPresenterImpl @Inject constructor(
             .subscribe(
                 { luasStop -> handleLuasStopResponse(luasStop) },
                 {
-                    view.showSnackBar("Network Error")
+                    view.showSnackBar(R.string.error_network)
                     view.showNoTramsAvailable(false)
                 })
     }
